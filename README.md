@@ -19,3 +19,13 @@ Open http://127.0.0.1:3000. You can set the port using the `PORT` environment va
 3. On success, display the topic and draft on the page. For `manual_review`, show the manager a clear message and clear any previous draft. Add at least one runnable test that covers a failure case and include instructions for running it.
 
 For local testing, the simulator accepts any plain text. Use one of the following markers to trigger the corresponding failure scenario: `[timeout]`, `[error]`, `[bad-json]`, `[bad-topic]`, or `[empty-draft]`.
+
+## Verification
+
+Run `node --test` to check the API contract. The suite starts its own servers on ephemeral loopback ports and closes them afterward.
+
+With `node server.mjs` running, open the page and submit these requests in order:
+
+1. Submit `Когда доставка?` and verify that «Доставка» and a draft appear.
+2. Submit `[bad-topic]` and verify that the topic and draft disappear and the page displays «Проверьте заявку вручную. Черновик ответа недоступен.»
+3. Submit `Какая стоимость?` and verify that «Стоимость» and a draft appear.
